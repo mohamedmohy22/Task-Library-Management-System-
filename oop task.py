@@ -4,18 +4,30 @@ class Book:
     def __init__(self, title, author, isbn, available=True):
         self.title = title
         self.author = author
-        self.isbn = str(isbn)
+        self.__isbn = str(isbn)
         self.available = available
+
+    def get_isbn(self):
+        return self.__isbn
+    
+    def set_isbn(self, new_isbn):
+        self.__isbn = new_isbn
 
     def display_info(self):
         status = "Available" if self.available else "Checked out"
-        print(f"Title: {self.title}\nAuthor: {self.author}\nISBN: {self.isbn}\nStatus: {status}\n")
+        print(f"Title: {self.title}\nAuthor: {self.author}\nISBN: {self.__isbn}\nStatus: {status}\n")
 
 class Member:
     def __init__(self, name, membership_id):
         self.name = name
-        self.membership_id = membership_id
+        self.__membership_id = membership_id
         self.borrowed_books = []
+    
+    def get_membership_id(self):
+        return self.__membership_id
+    
+    def set_membership_id(self, new_id):
+        self.__membership_id = new_id
 
     def borrow_book(self, book):
         if book is None:
@@ -49,7 +61,7 @@ class StaffMember(Member):
 
     def add_book(self, library, book):
         library.add_book(book)
-        print(f"Staff {self.name} : {book.title} to the library\n")
+        print(f"Staff {self.name} added {book.title} to the library\n")
 
 class Library:
     def __init__(self, name):
@@ -61,6 +73,8 @@ class Library:
 
     def list_books(self):
         print(f"Books in {self.name}: ")
+        if not self.books:
+            print("No books available\n")
         for book in self.books:
             book.display_info()
 
