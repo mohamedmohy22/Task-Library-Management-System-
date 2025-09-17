@@ -4,7 +4,7 @@ class Book:
     def __init__(self, title, author, isbn, available=True):
         self.title = title
         self.author = author
-        self.__isbn = str(isbn)
+        self.__isbn = isbn
         self.available = available
 
     def get_isbn(self):
@@ -96,3 +96,4 @@ member1.borrow_book(book1)
 library.list_books()
 member1.return_book(book1)
 library.list_books()
+
